@@ -19,7 +19,6 @@
 - Troubleshooting
 - Development notes & history
 - Contributing
-- License
 
 ---
 
