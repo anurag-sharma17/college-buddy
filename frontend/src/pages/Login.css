@@ -1,0 +1,736 @@
+/* Login and Signup Page Styles */
+.login-page,
+.signup-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Auth Card Styling */
+.auth-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.auth-card-header {
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  color: white;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-card-header i {
+  font-size: 24px;
+}
+
+.auth-card-header h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.auth-card-body {
+  padding: 30px;
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--dark-text);
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--input-bg);
+  color: var(--dark-text);
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  outline: none;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.remember-me input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.text-link {
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.text-link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Button Styling */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.primary-btn {
+  background-color: var(--color-primary);
+}
+
+.secondary-btn {
+  background-color: var(--color-secondary);
+  margin-top: 10px;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Message Styling */
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #EF4444;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.success-message {
+  background-color: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #22C55E;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s ease-out;
+  text-align: center;
+}
+
+.success-message p {
+  margin-bottom: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  color: var(--light-text);
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-1px);
+  }
+  20%, 80% {
+    transform: translateX(2px);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-4px);
+  }
+  40%, 60% {
+    transform: translateX(4px);
+  }
+}
+
+/* CSS Variables (add to your :root in the main CSS file) */
+:root {
+  --color-primary: #6366F1;
+  --color-primary-light: #818CF8;
+  --color-primary-dark: #4F46E5;
+  --color-secondary: #8B5CF6;
+  --color-secondary-light: #A78BFA;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --border-radius: 8px;
+}
+
+/* Dark mode variables */
+[data-theme='dark'] {
+  --color-primary: #818CF8;
+  --color-primary-light: #6366F1;
+  --color-primary-dark: #A5B4FC;
+  --color-secondary: #A78BFA;
+  --color-secondary-light: #C4B5FD;
+  --card-bg: #1F2937;
+  --input-bg: #374151;
+  --dark-text: #F9FAFB;
+  --light-text: #D1D5DB;
+}
+
+/* Signup Page Specific Animations */
+.signup-page .auth-card {
+  animation: slideInFromRight 0.8s ease-out;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Signup Page Styles */
+/* These styles complement the login styles provided earlier */
+
+/* Base styles for signup page */
+.signup-page {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Auth card with upgraded animation */
+  .signup-page .auth-card {
+    animation: slideInFromRight 0.8s ease-out;
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+  
+  /* Progress indicator styling */
+  .progress-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+  }
+  
+  .progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #777;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+  }
+  
+  .progress-step.active .step-number {
+    background-color: var(--color-primary);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(99, 102, 241, 0.3);
+  }
+  
+  .step-label {
+    font-size: 14px;
+    color: var(--light-text);
+    transition: all 0.3s ease;
+  }
+  
+  .progress-step.active .step-label {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+  
+  .progress-line {
+    flex: 1;
+    height: 3px;
+    background-color: #e0e0e0;
+    margin: 0 15px;
+    position: relative;
+    top: -13px;
+  }
+  
+  .progress-line:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--color-primary);
+    width: 0%;
+    transition: width 0.5s ease;
+  }
+  
+  .progress-step:nth-child(3).active ~ .progress-line:after,
+  .progress-step:nth-child(3).active + .progress-line:after {
+    width: 100%;
+  }
+  
+  /* Step content animations */
+  .step-content {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
+  
+  .fade-in {
+    animation-name: fadeIn;
+  }
+  
+  /* Role selection styling */
+  .role-selection {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .role-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .role-option:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+  
+  .role-option.selected {
+    border-color: var(--color-primary);
+    background-color: rgba(99, 102, 241, 0.1);
+  }
+  
+  .role-option input {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .role-option i {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+  }
+  
+  .role-option span {
+    font-weight: 500;
+  }
+  
+  .required {
+    color: #ff3b30;
+  }
+  
+  /* Form text help */
+  .form-text {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+  
+  /* Password visibility toggle */
+  .password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input-container input {
+    flex: 1;
+    padding-right: 40px;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+  
+  .password-toggle:hover {
+    color: #007bff;
+  }
+  
+  .password-toggle:focus {
+    outline: none;
+  }
+  
+  /* Improved form control focus */
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Fade in animation for step content */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Dark mode adjustments */
+  [data-theme='dark'] .error-message {
+    background-color: rgba(255, 59, 48, 0.2);
+    color: #ff6b6b;
+  }
+  
+  [data-theme='dark'] .form-text {
+    color: #adb5bd;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .auth-card {
+      padding: 15px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+  }
+  
+  /* Form actions for multi-step form */
+  .form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .form-actions .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  /* Success and error message styling */
+  .success-message {
+    background-color: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.5);
+    color: #22C55E;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease-out;
+    text-align: center;
+  }
+  
+  .error-message {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid #ff3b30;
+    color: #e60000;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+  }
+  
+  .error-message i {
+    margin-right: 8px;
+    font-size: 1rem;
+  }
+  
+  /* Step transitions animations */
+  @keyframes slideOutLeft {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(30px);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-30px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes shake {
+    10%, 90% {
+      transform: translateX(-1px);
+    }
+    20%, 80% {
+      transform: translateX(2px);
+    }
+    30%, 50%, 70% {
+      transform: translateX(-4px);
+    }
+    40%, 60% {
+      transform: translateX(4px);
+    }
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 576px) {
+    .role-selection {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+    }
+    
+    .auth-card-body {
+      padding: 20px;
+    }
+    
+    .step-label {
+      font-size: 12px;
+    }
+  }
+  /* Custom Checkbox Styling */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+/* Hide the default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox-custom {
+  position: absolute;
+  left: 0;
+  height: 22px;
+  width: 22px;
+  background-color: var(--input-bg, #f5f5f5);
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* When the checkbox is checked, add a background color */
+.checkbox-container input:checked ~ .checkbox-custom {
+  background-color: var(--primary-color, #4CAF50);
+  border-color: var(--primary-color, #4CAF50);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-custom:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkbox-custom:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkbox-custom:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Style the label */
+.checkbox-label {
+  margin-left: 5px;
+  font-weight: 500;
+}
+
+/* Add focus styles for accessibility */
+.checkbox-container input:focus ~ .checkbox-custom {
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
+/* When in dark mode, adjust the colors */
+[data-theme="dark"] .checkbox-custom {
+  background-color: var(--input-bg-dark, #333);
+  border-color: var(--border-color-dark, #555);
+}
+
+[data-theme="dark"] .checkbox-container input:checked ~ .checkbox-custom {
+  background-color: var(--primary-color, #4CAF50);
+  border-color: var(--primary-color, #4CAF50);
+}

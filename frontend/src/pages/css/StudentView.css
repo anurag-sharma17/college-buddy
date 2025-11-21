@@ -1,0 +1,476 @@
+/* StudentView.css */
+
+:root {
+  /* Light Theme Variables */
+  --primary-gradient: linear-gradient(135deg, #6366F1, #8B5CF6);
+  --secondary-gradient: linear-gradient(135deg, #10B981, #3B82F6);
+  --tertiary-gradient: linear-gradient(135deg, #F59E0B, #EF4444);
+  --light-bg: #F3F4F6;
+  --dark-text: #1F2937;
+  --light-text: #F9FAFB;
+  --card-bg: white;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --box-shadow-hover: 0 15px 30px -10px rgba(0, 0, 0, 0.15);
+  --border-radius: 12px;
+  --card-footer-bg: rgba(0, 0, 0, 0.03);
+  --nav-hover: rgba(0, 0, 0, 0.03);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --transition-default: all 0.2s ease;
+}
+
+[data-theme="dark"] {
+  --light-bg: #111827;
+  --dark-text: #F9FAFB;
+  --card-bg: #1F2937;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  --card-footer-bg: rgba(0, 0, 0, 0.2);
+  --nav-hover: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+}
+
+.student-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: var(--dark-text);
+}
+
+/* Timetable Navigation */
+.timetable-days-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.day-tab {
+  padding: 10px 18px;
+  border-radius: 20px;
+  background-color: var(--card-footer-bg);
+  border: none;
+  color: var(--dark-text);
+  cursor: pointer;
+  transition: var(--transition-default);
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.day-tab:hover {
+  background-color: var(--nav-hover);
+  transform: translateY(-2px);
+}
+
+.day-tab.active {
+  background: var(--primary-gradient);
+  color: var(--light-text);
+  box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+}
+
+/* Schedule Cards */
+.day-schedule h4 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--dark-text);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.schedule-cards {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.schedule-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  display: flex;
+  align-items: flex-start;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition-default);
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary-gradient);
+}
+
+.schedule-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.time-badge {
+  background: var(--secondary-gradient);
+  color: var(--light-text);
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.course-info {
+  flex: 1;
+}
+
+.course-info h5 {
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: var(--dark-text);
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  color: var(--dark-text);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.location-icon {
+  margin-right: 6px;
+}
+
+/* View Full Timetable Button */
+.view-full-timetable {
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.view-all-btn {
+  background-color: var(--card-footer-bg);
+  border: none;
+  color: var(--dark-text);
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition-default);
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.view-all-btn:hover {
+  background-color: var(--nav-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styles */
+.timetable-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timetable-grid th, 
+.timetable-grid td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.timetable-grid th {
+  background-color: var(--card-footer-bg);
+  font-weight: 600;
+  color: var(--dark-text);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.timetable-grid tr:last-child td {
+  border-bottom: none;
+}
+
+.timetable-grid tr:hover td {
+  background-color: var(--nav-hover);
+}
+
+/* Timetable Image View */
+.timetable-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+}
+
+.timetable-image {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Toggle Button Styling */
+.timetable-toggle {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.toggle-view-btn {
+  background-color: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-default);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-view-btn:hover {
+  background-color: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-view-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode support */
+[data-theme='dark'] .toggle-view-btn {
+  background-color: #818cf8;
+}
+
+[data-theme='dark'] .toggle-view-btn:hover {
+  background-color: #6366f1;
+}
+
+/* Loading and error states */
+.error-message {
+  text-align: center;
+  padding: 20px;
+  color: #EF4444;
+}
+
+.select-day-prompt {
+  text-align: center;
+  color: var(--dark-text);
+  opacity: 0.7;
+  padding: 30px 0;
+  font-size: 1.1rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: var(--dark-text);
+}
+
+/* Teacher Search and List */
+.search-section {
+  background: var(--primary-gradient);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  margin-bottom: 30px;
+  box-shadow: var(--card-shadow);
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.search-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.teacher-list-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.teacher-list, .teacher-detail {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: fit-content;
+}
+
+.teacher-list:hover, .teacher-detail:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-hover);
+}
+
+.teacher-list h2, .teacher-detail h2 {
+  background: var(--primary-gradient);
+  color: var(--light-text);
+  margin: 0;
+  padding: 15px 20px;
+  font-size: 1.5rem;
+}
+
+.teacher-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.teacher-item {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.teacher-item:hover {
+  background-color: var(--nav-hover);
+}
+
+.teacher-item.selected {
+  background-color: var(--card-footer-bg);
+}
+
+.teacher-name {
+  font-weight: 500;
+}
+
+.teacher-status {
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.teacher-item.available .teacher-status {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10B981;
+}
+
+.teacher-item.unavailable .teacher-status {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+}
+
+.teacher-card {
+  padding: 0 0 20px 0;
+}
+
+.teacher-info {
+  padding: 20px;
+}
+
+.teacher-info p {
+  margin-bottom: 10px;
+}
+
+.availability-badge {
+  display: inline-block;
+  padding: 5px 15px;
+  margin: 0 20px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 500;
+}
+
+.timetable-section {
+  padding: 0 20px 20px 20px;
+}
+
+.timetable-section h3 {
+  margin-bottom: 15px;
+  color: var(--dark-text);
+}
+
+.timetable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.timetable th, .timetable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.timetable th {
+  background-color: var(--card-footer-bg);
+  font-weight: 600;
+}
+
+.timetable tr:hover {
+  background-color: var(--nav-hover);
+}
+
+.no-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 1.2rem;
+  color: var(--dark-text);
+  opacity: 0.7;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .schedule-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .timetable-days-nav {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    flex-wrap: nowrap;
+  }
+  
+  .day-tab {
+    flex: 0 0 auto;
+  }
+  
+  .student-timetable-view {
+    overflow-x: auto;
+  }
+  
+  .timetable-image-container,
+  .timetable-image {
+    max-height: 350px;
+  }
+  
+  .teacher-list-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .timetable-section {
+    overflow-x: auto;
+  }
+}

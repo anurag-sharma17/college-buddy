@@ -1,0 +1,477 @@
+/* TeacherView.css */
+
+:root {
+  /* Light Theme Variables */
+  --primary-gradient: linear-gradient(135deg, #6366F1, #8B5CF6);
+  --secondary-gradient: linear-gradient(135deg, #10B981, #3B82F6);
+  --tertiary-gradient: linear-gradient(135deg, #F59E0B, #EF4444);
+  --light-bg: #F3F4F6;
+  --dark-text: #1F2937;
+  --light-text: #F9FAFB;
+  --card-bg: white;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --border-radius: 12px;
+  --card-footer-bg: rgba(0, 0, 0, 0.03);
+  --nav-hover: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] {
+  --light-bg: #111827;
+  --dark-text: #F9FAFB;
+  --card-bg: #1F2937;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  --card-footer-bg: rgba(0, 0, 0, 0.2);
+  --nav-hover: rgba(255, 255, 255, 0.05);
+}
+
+.teacher-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  color: var(--dark-text);
+}
+
+.profile-container, .timetable-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-container:hover, .timetable-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15);
+}
+
+.profile-header, .timetable-header {
+  background: var(--primary-gradient);
+  color: var(--light-text);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Timetable specific styles */
+.timetable-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.timetable-header {
+  background: var(--primary-gradient);
+  color: var(--light-text);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timetable-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Toggle buttons for Manual Entry and Image Upload */
+.display-mode-toggle {
+  display: flex;
+}
+
+.mode-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--light-text);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s;
+}
+
+.mode-button:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.mode-button:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.mode-button.active {
+  background-color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}
+
+/* Add Slot button styling */
+.add-button {
+  background: var(--secondary-gradient);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+  margin: 15px;
+}
+
+.add-button:hover {
+  opacity: 0.9;
+}
+
+/* Empty timetable message */
+.no-timetable {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  color: var(--dark-text);
+  opacity: 0.7;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Timetable list container */
+.timetable-list {
+  padding: 15px;
+}
+
+/* Timetable actions container */
+.timetable-actions {
+  padding: 5px 15px;
+}
+
+/* Manual timetable section */
+.manual-timetable-section {
+  width: 100%;
+}
+
+/* Image Upload Section Styles */
+.image-timetable-section {
+  padding: 20px;
+  width: 100%;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.image-upload label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  color: var(--dark-text);
+}
+
+.file-input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  background-color: var(--card-bg);
+  border: 1px solid #E5E7EB;
+  border-radius: var(--border-radius);
+  color: var(--dark-text);
+}
+
+[data-theme="dark"] .file-input {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.save-timetable-button {
+  background: var(--secondary-gradient);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+  width: fit-content;
+}
+
+.save-timetable-button:hover {
+  opacity: 0.9;
+}
+
+.save-timetable-button:disabled {
+  background: linear-gradient(135deg, #9CA3AF, #6B7280);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.image-preview {
+  margin: 15px 0;
+  max-width: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid #E5E7EB;
+}
+
+[data-theme="dark"] .image-preview {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.image-preview img {
+  width: 100%;
+  display: block;
+}
+
+/* Manual Entry and Image Upload toggle buttons */
+.mode-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--light-text);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+}
+
+.mode-button:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-right: none;
+}
+
+.mode-button:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: none;
+}
+
+.mode-button.active {
+  background-color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .image-timetable-section {
+    padding: 15px;
+  }
+  
+  .save-timetable-button {
+    width: 100%;
+  }
+}
+
+.teacher-view h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.edit-button, .save-button, .add-button {
+  background: var(--secondary-gradient);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+}
+
+.edit-button:hover, .save-button:hover, .add-button:hover {
+  opacity: 0.9;
+}
+
+.delete-button {
+  background: var(--tertiary-gradient);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: opacity 0.3s ease;
+}
+
+.delete-button:hover {
+  opacity: 0.9;
+}
+
+.availability-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-label {
+  font-weight: 500;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  transition: .4s;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+  background-color: rgba(37, 99, 235, 0.6);
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
+  box-shadow: 0 0 8px 1px rgba(59, 130, 246, 0.5);
+}
+
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.profile-details, .edit-form {
+  padding: 20px;
+}
+
+.detail-row {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.detail-label {
+  font-weight: 600;
+  width: 150px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid #E5E7EB;
+  background-color: var(--card-bg);
+  color: var(--dark-text);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.add-slot-form {
+  padding: 20px;
+  background-color: var(--card-footer-bg);
+}
+
+/* Timetable */
+.timetable-list {
+  padding: 20px;
+}
+
+.timetable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.timetable th, .timetable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .timetable th, 
+[data-theme="dark"] .timetable td {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.timetable th {
+  background-color: var(--card-footer-bg);
+  font-weight: 600;
+}
+
+.timetable tr:hover {
+  background-color: var(--nav-hover);
+}
+
+.no-timetable {
+  text-align: center;
+  padding: 20px;
+  color: var(--dark-text);
+  opacity: 0.7;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: var(--dark-text);
+}
+
+@media (max-width: 768px) {
+  .form-row {
+      flex-direction: column;
+      gap: 10px;
+  }
+  
+  .profile-header, .timetable-header {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+  }
+  
+  .timetable th, .timetable td {
+      padding: 8px;
+      font-size: 0.9rem;
+  }
+}

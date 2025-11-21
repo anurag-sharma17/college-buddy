@@ -1,0 +1,72 @@
+/* Scroll to top button - Side by side with chatbot */
+.scroll-to-top {
+  position: fixed;
+  bottom: 24px; /* Same level as chatbot */
+  right: 96px; /* Positioned to the left of chatbot (24px + 60px + 12px gap) */
+  width: 60px; /* Same size as chatbot */
+  height: 60px; /* Same size as chatbot */
+  border-radius: 50%;
+  background-color: #8b5cf6;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-to-top i {
+  font-size: 22px;
+}
+
+.scroll-to-top:hover {
+  background-color: #6644b6;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Add a slight pulse animation to make the button more noticeable */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.scroll-to-top.show:hover {
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 20px; /* Same level as chatbot */
+    right: 80px; /* Adjusted for mobile spacing (16px + 50px + 14px gap) */
+    width: 50px;
+    height: 50px;
+  }
+
+  .scroll-to-top i {
+    font-size: 20px;
+  }
+}
