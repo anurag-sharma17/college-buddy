@@ -38,3 +38,6 @@ coverage/
 # Optional: lockfile if you prefer not to commit
 # package-lock.json
 # yarn.lock
+
+# Database dumps
+seed-data.json

@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:export": "node scripts/exportData.js",
+    "db:migrate": "node scripts/migrateDB.js",
+    "db:migrate:fresh": "cross-env DROP_EXISTING=true node scripts/migrateDB.js",
+    "db:setup": "node scripts/setupDB.js",
+    "db:setup:seed": "node scripts/setupDB.js --seed",
+    "db:setup:fresh": "node scripts/setupDB.js --seed --fresh"
   },
   "keywords": [],
   "author": "",

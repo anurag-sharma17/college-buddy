@@ -14,6 +14,7 @@
   - Backend
   - Frontend
 - Environment variables
+- Database setup & migration
 - API endpoints (high level)
 - Chatbot details
 - Troubleshooting
@@ -59,6 +60,11 @@ backend/
   routes/
     chatbotRoutes.js
   models/
+  scripts/
+    setupDB.js          # Create all collections, schemas & indexes
+    exportData.js       # Export current DB to seed-data.json
+    migrateDB.js        # Import seed-data.json into a fresh DB
+    seed-data.json      # (Ignored by git) Your local DB export
 frontend/
   package.json
   public/
@@ -112,19 +118,107 @@ Now open `http://localhost:3000` and login to the app. The chatbot floating icon
 
 ## Environment variables
 
-Create a `.env` file in `backend/` containing at least the following (example keys used during development):
+A `.env.example` file is included in `backend/`. Copy it and fill in your values:
+
+```powershell
+cd backend
+cp .env.example .env
+# Then edit .env with your actual values
+```
+
+The example file contains:
 
 ```
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/college_buddy
+MONGO_URI=mongodb://localhost:27017/
 JWT_SECRET=your_jwt_secret_here
-HUGGINGFACE_API_KEY=hf_xxx   # Optional - currently not required for keyword fallback chatbot
-OPENAI_API_KEY=sk-...       # Optional - only if you re-enable OpenAI integration
-GEMINI_API_KEY=...         # Optional - previously attempted
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_app_password
+FRONTEND_URL=http://localhost:3000
+PORT=5000
+HUGGINGFACE_API_KEY=hf_your_key_here    # Optional
 ```
 
 Notes:
-- The current chatbot implementation uses a keyword-based fallback and does not require an external AI key. The keys above are only needed if you want to connect to third-party AI services.
+- `MONGO_URI` and `JWT_SECRET` are required for the app to function.
+- `EMAIL_USER` / `EMAIL_PASS` are needed only for the password-reset email feature (use a Gmail app password).
+- `HUGGINGFACE_API_KEY` is optional — the chatbot uses a keyword-based fallback by default and does not require an external AI key.
+
+## Database setup & migration
+
+The project includes database management scripts in `backend/scripts/` that let you set up the MongoDB database with all schemas, indexes, and seed data on any new device. **User data is always excluded** from exports and migrations — each environment starts with a clean user table.
+
+### Available npm scripts
+
+Run these from the `backend/` directory:
+
+| Command | What it does |
+|---|---|
+| `npm run db:setup` | Creates all 12 collections with their Mongoose schemas and indexes (no data inserted) |
+| `npm run db:setup:seed` | Creates collections + indexes, then seeds data from `seed-data.json` (skips collections that already have data) |
+| `npm run db:setup:fresh` | **Drops all existing collections**, recreates schemas + indexes, and seeds data |
+| `npm run db:export` | Exports all data (except users) from the current MongoDB to `scripts/seed-data.json` |
+| `npm run db:migrate` | Imports `seed-data.json` into MongoDB (skips collections that already have data) |
+| `npm run db:migrate:fresh` | Drops existing data and re-imports from `seed-data.json` |
+
+### Collections managed
+
+The setup script creates the following collections:
+
+| Collection | Key indexes | Notes |
+|---|---|---|
+| `users` | `email` (unique) | Schema created but **never seeded** — users register themselves |
+| `teachers` | `email` (unique) | Teacher profiles with timetable and location |
+| `seatings` | — | Teacher seating/cabin assignments |
+| `clubs` | — | Student clubs with members and events |
+| `resources` | — | Shared study resources/files |
+| `studygroups` | — | Study groups with meeting schedules |
+| `alumnis` | `email` (unique) | Alumni profiles and networking |
+| `subjects` | `code` (unique) | Course subjects by year |
+| `specializations` | `code` (unique) | Third/fourth year specialization tracks |
+| `contacts` | — | Emergency, faculty, and department contacts |
+| `routes` | — | Transport/bus route schedules |
+| `maps` | — | Campus map images |
+
+### Setting up a new device
+
+After cloning the repo on a new machine:
+
+```powershell
+cd backend
+
+# 1. Install dependencies
+npm install
+
+# 2. Create your .env file with MONGO_URI pointing to your local MongoDB
+#    (see Environment Variables section above)
+
+# 3. Set up the database with all schemas, indexes, and seed data
+npm run db:setup:seed
+
+# 4. Start the server
+node server.js
+```
+
+### Updating seed data
+
+If you've added new data (contacts, routes, subjects, etc.) to your database and want to share it with the team:
+
+```powershell
+# Export current DB data (excludes users) to seed-data.json
+npm run db:export
+
+# Commit the updated seed-data.json
+git add backend/scripts/seed-data.json
+git commit -m "Update seed data"
+git push
+```
+
+### Script details
+
+- **`setupDB.js`** — The main setup script. Registers all Mongoose schemas from `server.js`, creates each collection, and syncs indexes. Accepts `--seed` to also import data and `--fresh` to drop everything first.
+- **`exportData.js`** — Connects to MongoDB, iterates over all collections (skipping `users`), and writes every document to `scripts/seed-data.json`.
+- **`migrateDB.js`** — Reads `seed-data.json` and inserts documents into MongoDB. Respects the `DROP_EXISTING` environment variable to control overwrite behavior.
+- **`seed-data.json`** — The exported data file. **This file is ignored by git** to prevent accidental leaks of sensitive local database dumps. To share base data with your team, you can share this file securely or commit a sanitized version (e.g. `seed-data.example.json`).
 
 ## API endpoints (high level)
 
