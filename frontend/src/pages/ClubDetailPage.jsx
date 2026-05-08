@@ -320,7 +320,7 @@ function ClubDetailPage() {
         }, 800);
     }, [clubId]);
 
-    const formatDate = (dateString) => {
+    const _formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', {
             weekday: 'long',

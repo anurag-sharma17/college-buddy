@@ -26,7 +26,8 @@ function Contacts() {
 
   useEffect(() => {
     filterContacts();
-  }, [selectedCategory, searchTerm, contacts]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, searchTerm, contacts, filterContacts]);
 
   const fetchContacts = async () => {
     try {

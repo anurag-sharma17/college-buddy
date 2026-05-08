@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         setCurrentUser(null);
         setLoading(false);
       });
-  }, []);
+  }, [API_URL]);
 
   // Login function
   const login = async (user) => {

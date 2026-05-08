@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import StudentView from './StudentView';
 import TeacherView from './TeacherView';
 
 function TeacherAvailability() {
+    // eslint-disable-next-line no-unused-vars
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const [activeTab, setActiveTab] = useState('Teachers');
     const { currentUser, isAuthenticated, isTeacher, isStudent } = useAuth();
     const navigate = useNavigate();
 
@@ -34,27 +34,6 @@ function TeacherAvailability() {
             }
         }
     }, []);
-
-    // Handle theme toggle
-    const handleThemeToggle = () => {
-        const newTheme = isDarkMode ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        setIsDarkMode(!isDarkMode);
-    };
-
-    // Handle tab click
-    const handleTabClick = (tabName) => {
-        setActiveTab(tabName);
-    };
-
-    const handleLogout = () => {
-        // Clear any authentication tokens or user data from localStorage
-        localStorage.removeItem('authToken'); // Adjust based on how you store auth data
-        
-        // Navigate to home or login page
-        navigate('/home'); // or navigate('/login') depending on your app flow
-        };
 
     // If authenticated but loading, show loading state
     if (!currentUser) {
