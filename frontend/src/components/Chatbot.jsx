@@ -119,8 +119,7 @@ const Chatbot = () => {
 
   return (
     <>
-      {/* Welcome Modal */}
-      <ChatbotWelcome />
+      {/* Welcome Modal - disabled for production */}
 
       {/* Floating Chat Button */}
       <div
