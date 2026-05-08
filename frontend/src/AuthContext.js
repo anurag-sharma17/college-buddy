@@ -14,8 +14,9 @@ export const AuthProvider = ({ children }) => {
   const [isNewLogin, setIsNewLogin] = useState(false);
 
   // Base API URL from environment variable or default to localhost
-  const API_URL =
-    process.env.REACT_APP_API_URL || "http://localhost:5000/api/auth";
+  const API_URL = process.env.REACT_APP_API_URL
+    ? `${process.env.REACT_APP_API_URL}/auth`
+    : "http://localhost:5000/api/auth";
 
   // Set up axios interceptor to attach Bearer token to every request
   axios.interceptors.request.use((config) => {
