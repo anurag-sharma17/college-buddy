@@ -31,9 +31,7 @@ const YearSubjects = ({ year, title }) => {
     const fetchSubjects = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5000/api/subjects/${year}`, {
-          withCredentials: true
-        });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects/${year}`);
         setSubjects(response.data);
         setError(null);
       } catch (err) {
@@ -87,11 +85,11 @@ const YearSubjects = ({ year, title }) => {
     }
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/subjects', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects`, {
         ...newSubject,
         credits: parseInt(newSubject.credits),
         year
-      }, { withCredentials: true });
+      });
       setSubjects([...subjects, response.data]);
       setShowAddForm(false);
       setNewSubject({ name: '', code: '', description: '', instructor: '', credits: '', documentLink: '' });
@@ -112,11 +110,11 @@ const YearSubjects = ({ year, title }) => {
     }
     setLoading(true);
     try {
-      const response = await axios.put(`http://localhost:5000/api/subjects/${editSubjectId}`, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects/${editSubjectId}`, {
         ...newSubject,
         credits: parseInt(newSubject.credits),
         year
-      }, { withCredentials: true });
+      });
       setSubjects(subjects.map(subject => subject._id === editSubjectId ? response.data : subject));
       setShowEditForm(false);
       setEditSubjectId(null);
@@ -147,7 +145,7 @@ const YearSubjects = ({ year, title }) => {
     if (window.confirm('Are you sure you want to delete this subject?')) {
       setLoading(true);
       try {
-        await axios.delete(`http://localhost:5000/api/subjects/${id}`, { withCredentials: true });
+        await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects/${id}`);
         setSubjects(subjects.filter(subject => subject._id !== id));
         setError(null);
       } catch (err) {

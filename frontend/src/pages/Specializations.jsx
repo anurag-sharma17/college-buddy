@@ -29,9 +29,7 @@ const Specializations = () => {
     const fetchSpecializations = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5000/api/specializations/${selectedYear}`, {
-          withCredentials: true
-        });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/specializations/${selectedYear}`);
         setSpecializations(response.data);
         setError(null);
       } catch (err) {
@@ -88,12 +86,12 @@ const Specializations = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/api/subjects', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects`, {
         ...newSubject,
         credits: parseInt(newSubject.credits),
         year: 'specialization',
         specializationId: editSpecializationId
-      }, { withCredentials: true });
+      });
       setSpecializations(specializations.map(spec =>
         spec._id === editSpecializationId
           ? { ...spec, subjects: [...spec.subjects, response.data] }
@@ -118,12 +116,12 @@ const Specializations = () => {
     }
     setLoading(true);
     try {
-      const response = await axios.put(`http://localhost:5000/api/subjects/${editSubjectId}`, {
+      const response = await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects/${editSubjectId}`, {
         ...newSubject,
         credits: parseInt(newSubject.credits),
         year: 'specialization',
         specializationId: editSpecializationId
-      }, { withCredentials: true });
+      });
       setSpecializations(specializations.map(spec =>
         spec._id === editSpecializationId
           ? {
@@ -160,7 +158,7 @@ const Specializations = () => {
     if (window.confirm('Are you sure you want to delete this subject?')) {
       setLoading(true);
       try {
-        await axios.delete(`http://localhost:5000/api/subjects/${subjectId}`, { withCredentials: true });
+        await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/subjects/${subjectId}`);
         setSpecializations(specializations.map(spec =>
           spec._id === specializationId
             ? { ...spec, subjects: spec.subjects.filter(sub => sub._id !== subjectId) }

@@ -17,8 +17,14 @@ export const AuthProvider = ({ children }) => {
   const API_URL =
     process.env.REACT_APP_API_URL || "http://localhost:5000/api/auth";
 
-  // Configure axios to include credentials (cookies) in requests
-  axios.defaults.withCredentials = true;
+  // Set up axios interceptor to attach Bearer token to every request
+  axios.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
 
   // Helper function to set user and determine if it's a new login
   const setUser = (userData) => {
@@ -64,6 +70,10 @@ export const AuthProvider = ({ children }) => {
   const register = async (user) => {
     try {
       const response = await axios.post(`${API_URL}/register`, user);
+      // Store token in localStorage for API calls
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
       setUser(response.data.user); // Set user and isNewLogin
       return true;
     } catch (error) {

@@ -17,6 +17,8 @@ app.use(
   cors({
     origin: process.env.FRONTEND_URL || "http://localhost:3000",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -389,8 +391,9 @@ app.post("/api/auth/register", async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    // Return user data in response
+    // Return user data and token in response
     res.status(201).json({
+      token: token,
       user: {
         id: user._id,
         name: user.name,

@@ -32,7 +32,7 @@ function StudyGroups() {
 
   const fetchStudyGroups = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/study-groups");
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/study-groups`);
       const data = await response.json();
       if (data.success) {
         setStudyGroups(data.data);
@@ -54,7 +54,7 @@ function StudyGroups() {
 
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5000/api/study-groups", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/study-groups`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function StudyGroups() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/api/study-groups/${groupId}/join`,
+        `${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/study-groups/${groupId}/join`,
         {
           method: "POST",
           headers: {
@@ -127,7 +127,7 @@ function StudyGroups() {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/api/study-groups/${groupId}/leave`,
+        `${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/study-groups/${groupId}/leave`,
         {
           method: "POST",
           headers: {

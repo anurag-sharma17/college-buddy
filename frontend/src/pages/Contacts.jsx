@@ -30,7 +30,7 @@ function Contacts() {
 
   const fetchContacts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/contacts");
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/contacts`);
       const data = await response.json();
       console.log("Contacts API Response:", data);
       if (data.success) {
