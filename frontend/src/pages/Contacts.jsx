@@ -22,44 +22,17 @@ function Contacts() {
 
   useEffect(() => {
     fetchContacts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    filterContacts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedCategory, searchTerm, contacts, filterContacts]);
-
-  const fetchContacts = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/contacts`);
-      const data = await response.json();
-      console.log("Contacts API Response:", data);
-      if (data.success) {
-        console.log("Setting contacts:", data.data);
-        setContacts(data.data);
-        setFilteredContacts(data.data);
-      } else {
-        console.log("API call was not successful:", data);
-      }
-    } catch (error) {
-      console.error("Error fetching contacts:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const filterContacts = () => {
     let filtered = contacts;
-    console.log("Filtering contacts. Total contacts:", contacts.length);
-    console.log("Selected category:", selectedCategory);
-    console.log("Search term:", searchTerm);
 
     // Filter by category
     if (selectedCategory !== "All") {
       filtered = filtered.filter(
         (contact) => contact.category === selectedCategory
       );
-      console.log("After category filter:", filtered.length);
     }
 
     // Filter by search term
@@ -75,11 +48,24 @@ function Contacts() {
             .includes(searchTerm.toLowerCase()) ||
           contact.email?.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      console.log("After search filter:", filtered.length);
     }
 
-    console.log("Final filtered contacts:", filtered.length);
     setFilteredContacts(filtered);
+  }, [selectedCategory, searchTerm, contacts]);
+
+  const fetchContacts = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000/api"}/contacts`);
+      const data = await response.json();
+      if (data.success) {
+        setContacts(data.data);
+        setFilteredContacts(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching contacts:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getCategoryIcon = (category) => {
