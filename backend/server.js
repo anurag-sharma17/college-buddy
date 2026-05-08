@@ -507,7 +507,13 @@ app.post("/api/auth/forgot-password", async (req, res) => {
     res.json({ message: "Password reset email sent" });
   } catch (error) {
     console.error("Forgot password error:", error);
-    res.status(500).json({ error: "Server error" });
+    if (error.code === "ETIMEDOUT" || error.code === "ESOCKET") {
+      res.status(503).json({
+        error: "Email service is temporarily unavailable. Please contact the administrator to reset your password."
+      });
+    } else {
+      res.status(500).json({ error: "Failed to send reset email. Please try again later." });
+    }
   }
 });
 
